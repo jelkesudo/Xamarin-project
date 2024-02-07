@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="projekatIspit.Views.SQLitePage"
+             xmlns:vm="clr-namespace:projekatIspit.ViewModels">
+
+    <ContentPage.BindingContext>
+        <vm:SQLitePageViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout Padding="15">
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                <Button Text="Add new importance level" Command="{Binding GoToInsertImportance}"/>
+                <Button Text="Add new task" Command="{Binding GoToInsertTask}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <SearchBar Placeholder="Search items..." Text="{Binding Keyword}"/>
+            </StackLayout>
+            <CollectionView ItemsSource="{Binding Tasks}"  x:Name="collectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItem Text="Delete" BackgroundColor="PaleVioletRed" Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.DeleteCommand}" CommandParameter="{Binding}"/>
+                                <SwipeItem Text="Edit" BackgroundColor="Green" Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.EditCommand}" CommandParameter="{Binding}"/>
+                            </SwipeView.RightItems>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="1"
+                       Text="{Binding Name}"
+                       FontAttributes="Bold" />
+                            <Label Grid.Row="1"
+                       Grid.Column="1"
+                       Text="{Binding Description}"
+                       FontAttributes="Italic"
+                       VerticalOptions="End" />
+                            <Label Grid.Row="2"
+                       Grid.Column="1"
+                       Text="{Binding Importance}"
+                       FontAttributes="Italic"
+                       VerticalOptions="End" />
+                        </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

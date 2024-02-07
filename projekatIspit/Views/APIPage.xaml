@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="projekatIspit.Views.APIPage"
+             xmlns:vm="clr-namespace:projekatIspit.ViewModels">
+
+    <ContentPage.BindingContext>
+        <vm:APIPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Label Text="{Binding DeleteError}" TextColor="Red"/>
+            <Button Command="{Binding GoToAddAlbum}" Text="Add new album"/>
+            <CollectionView ItemsSource="{Binding Albums}" x:Name="collectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItem Text="Delete" BackgroundColor="PaleVioletRed" Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.DeleteCommand}" CommandParameter="{Binding}"/>
+                                <SwipeItem Text="Edit" BackgroundColor="Green" Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.EditCommand}"/>
+                            </SwipeView.RightItems>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.RowSpan="2"
+                                   Source="{Binding Image}"
+                                   Aspect="AspectFill"
+                                   HeightRequest="60"
+                                   WidthRequest="60" />
+                                <Label Grid.Column="1"
+                                   Text="{Binding Name}"
+                                   FontAttributes="Bold" />
+                                <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding Artist}"
+                                   FontAttributes="Italic"
+                                   VerticalOptions="End" />
+                            </Grid>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

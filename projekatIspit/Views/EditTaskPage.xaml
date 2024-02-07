@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="projekatIspit.Views.EditTaskPage"
+             xmlns:vm="clr-namespace:projekatIspit.ViewModels">
+
+    <ContentPage.BindingContext>
+        <vm:EditTaskPageViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout Padding="15">
+            <Label Text="Edit task" HorizontalOptions="Center" FontSize="Title"/>
+            <StackLayout Padding="0, 10, 0, 10" Spacing="0">
+                <Entry Text="{Binding Name}" Placeholder="Title"/>
+                <Label Text="{Binding NameError}" TextColor="Red"/>
+            </StackLayout>
+            <StackLayout Padding="0, 10, 0, 10" Spacing="0">
+                <Editor Text="{Binding Description}" MaxLength="500" AutoSize="TextChanges" Placeholder="Task description"/>
+                <Label Text="{Binding DescriptionError}" TextColor="Red"/>
+            </StackLayout>
+            <StackLayout Padding="0, 10, 0, 10" Spacing="0">
+                <Picker ItemsSource="{Binding Importances}"
+                        SelectedItem="{Binding SelectedImportance}"
+                        ItemDisplayBinding="{Binding Name}"/>
+            </StackLayout>
+            <StackLayout Padding="0, 10, 0, 10" Spacing="0">
+                <Button Command="{Binding EditTask}" IsEnabled="{Binding FormEnable}" Text="Add"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

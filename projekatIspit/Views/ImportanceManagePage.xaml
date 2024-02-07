@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="projekatIspit.Views.ImportanceManagePage"
+             xmlns:vm="clr-namespace:projekatIspit.ViewModels">
+    
+    <ContentPage.BindingContext>
+        <vm:ManageImportancePageViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="Center" Padding="15">
+            <StackLayout Spacing="0">
+                <Label Text="Add a new Importance"
+                    HorizontalOptions="Center"/>
+                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Vertical">
+                    <Entry Text="{Binding ImportanceName}" Placeholder="Importance level name" HorizontalOptions="CenterAndExpand"/>
+                    <Label Text="{Binding ImportanceNameError}" TextColor="Red" Padding="0, 0, 0, 10" HorizontalOptions="Center"/>
+                    <Button Command="{Binding AddNewImportance}" IsEnabled="{Binding FormEnable}" Text="Add"/>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Spacing="0">
+                <Label Text="Importances List"
+                HorizontalOptions="Center"/>
+                <StackLayout>
+                    <Picker ItemsSource="{Binding Importances}"
+                        SelectedItem="{Binding SelectedImportance}"
+                        ItemDisplayBinding="{Binding Name}"/>
+                    <StackLayout>
+                        <Button Command="{Binding DeleteImportance}" Text="Delete" BackgroundColor="Red"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

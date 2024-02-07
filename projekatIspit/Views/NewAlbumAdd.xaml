@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="projekatIspit.Views.NewAlbumAdd"
+             xmlns:vm="clr-namespace:projekatIspit.ViewModels">
+
+    <ContentPage.BindingContext>
+        <vm:AddNewAlbumViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Padding="15">
+                <Label Text="Welcome to Xamarin.Forms!" HorizontalOptions="Center"/>
+                <StackLayout>
+                    <Entry Text="{Binding Name}" Placeholder="Title"/>
+                    <Label Text="{Binding NameError}" TextColor="Red"/>
+                </StackLayout>
+                <StackLayout>
+                    <Picker ItemsSource="{Binding Artists}"
+                        SelectedItem="{Binding SelectedArtist}"
+                        ItemDisplayBinding="{Binding Name}"/>
+                </StackLayout>
+                <StackLayout>
+                    <Button Text="Add album" Command="{Binding AddAlbumCommand}" IsEnabled="{Binding AlbumValid}"/>
+                    <Label Text="{Binding AddError}" TextColor="Red"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
